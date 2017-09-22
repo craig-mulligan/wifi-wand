@@ -1,4 +1,4 @@
-FROM resin/%%RESIN_MACHINE_NAME%%-node:6
+FROM resin/%%RESIN_MACHINE_NAME%%-node:8
 
 # Install other apt deps
 RUN apt-get update && apt-get install -y \
@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y \
   libsmbclient \
   libssh-4 \
   fbset \
+  wireless-tools \
   libexpat-dev && rm -rf /var/lib/apt/lists/*
 
 # Set Xorg and FLUXBOX preferences
@@ -40,7 +41,7 @@ COPY ./app/package.json ./
 
 # Install npm modules for the application
 RUN JOBS=MAX npm install --unsafe-perm --production \
-	&& npm cache clean && node_modules/.bin/electron-rebuild
+	&& npm cache verify && node_modules/.bin/electron-rebuild
 
 # Move app to filesystem
 COPY ./app ./

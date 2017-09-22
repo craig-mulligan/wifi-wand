@@ -1,31 +1,25 @@
-# resin-electronjs
+# Wifi Wand
 
-a boilerplate for developing kiosks, digital signage or other human-machine interaction projects based on [ElectronJS](http://electron.atom.io/) and [resin.io](http://resin.io)
+### Requirements
 
-## Getting started
+* 1 or more mobile phones cable of creating a 2.4ghz hotspot.
+* Any number of Raspberry Pis (more the merrier)
 
-- Sign up on [resin.io](https://dashboard.resin.io/signup)
-- go throught the [getting started guide](http://docs.resin.io/raspberrypi/nodejs/getting-started/) and create a new application
-- clone this repository to your local workspace
-- add the _resin remote_ to your local workspace using the useful shortcut in the dashboard UI ![remoteadd](https://raw.githubusercontent.com/resin-io-playground/boombeastic/master/docs/gitresinremote.png)
-- `git push resin master`
-- see the magic happening, your device is getting updated Over-The-Air!
+### Required Environment variables
+
+* `INTERVAL` : milliseconds between network scans. default: `3000`. Fastest you can go is `1500` otherwise scans start to fail because of resource busy err.
+
+* `INTERFACE` : defaults to `wlan0`
+
+* `SSIDS`: string of comma separated ssids you'd like to monitor and map colours to.
+
+* `COLORS` : string of comma separated colors to map the colourScale. eg: `red, green, blue` (can be hex values too). These colors are mapped to the SSIDs therefore there should be the same number.
 
 ## Configure via [environment variables](https://docs.resin.io/management/env-vars/)
 Variable Name | Value | Description | Device-specific
 ------------ | ------------- | ------------- | -------------
 **`RESIN_HOST_CONFIG_gpu_mem`** | a value from `64` to `160` | the amount of RAM dedicated to the GPU | Raspberry Pi (all revs)
 
-Apply the above settings in the "Fleet Configuration" panel (if applying it for the all devices withing your application), or "Device Configuration" panel (if applying it for a single device).
-
-
-### WHY THIS TEMPLATE
-
-Achieving kinda-smooth desktop application display on a devices like the raspberrypi is hard. This project aims to provide a quickstart template.
-
-### WHY FLUXBOX
-
-We did a lot of researches and tests with several window managers. [Fluxbox](http://fluxbox.org/) ended up being the most balanced between minimum footprint and features
 
 ### URL LAUNCHER config via ENV VARS
 *__!!! Please note that since `0.1.0` the `bool`-based env vars dropped `true` / `false` strings in favour of `0` / `1` ones. !!!__*
@@ -45,8 +39,3 @@ simply set these [environment varables](http://docs.resin.io/#/pages/management/
 * **`URL_LAUNCHER_TOUCH_SIMULATE`** *bool* (converted from *string*) - simulates touch events - might be useful for touchscreen with partial driver support - be aware this could be a performance hog  - *defaults to* `0`
 * **`URL_LAUNCHER_ZOOM`** *float* (converted from *string*) - The default zoom factor of the page, 3.0 represents 300%  - *defaults to* `1.0`
 * **`URL_LAUNCHER_OVERLAY_SCROLLBARS`** *bool* (converted from *string*) - enables overlay scrollbars  - *defaults to* `0`
-
-### Related
-
-- [resin-electronjs vue boilerplate](https://github.com/imomaliev/resin-electron-vue) by [@imomaliev](https://github.com/imomaliev)
-- [resin-electronjs react boilerplate](https://github.com/resin-io-playground/resin-electronjs-react) by [@craig-mulligan](https://github.com/craig-mulligan)
